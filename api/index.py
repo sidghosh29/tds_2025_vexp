@@ -29,8 +29,8 @@ def get_marks(request: Request):
     output = []
     names = request.query_params.getlist("name")
 
-    for s in data:
-        if s["name"] in names:
-            output.append(s["marks"])
+    name_to_marks = {entry["name"]: entry["marks"] for entry in data}
+
+    output = [name_to_marks.get(name, None) for name in names]
 
     return output
