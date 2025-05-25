@@ -26,11 +26,11 @@ def index():
 @app.get("/api")
 def get_marks(request: Request):
 
-    output = []
+    output = {"marks":[]}
     names = request.query_params.getlist("name")
 
     name_to_marks = {entry["name"]: entry["marks"] for entry in data}
 
-    output = [name_to_marks.get(name, None) for name in names]
+    output["marks"] = [name_to_marks.get(name, None) for name in names]
 
     return output
